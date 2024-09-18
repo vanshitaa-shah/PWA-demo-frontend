@@ -71,7 +71,7 @@ const configurePushSub = () => {
       console.log({sub});
       if (sub === null) {
         //create new subscription
-        let vapidPublicKey =process.env.VAPID_PUBLIC_KEY
+        let vapidPublicKey ="BIE1h6WDiVTTmPSRmgCdupFKYjL0p9HE3CNMOE9OprhHug095g1OPoXksVTbL3I_NSpOWJWg9HEj4Kgv6q3Xnv0"
         console.log({vapidPublicKey});
 
         let convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);

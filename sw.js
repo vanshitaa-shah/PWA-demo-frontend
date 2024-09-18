@@ -1,5 +1,6 @@
-importScripts("/src/js/idb.js");
-importScripts("/src/js/utility.js");
+importScripts("./src/js/idb.js");
+importScripts("./src/js/utility.js");
+
 
 const CACHE_STATIC_NAME = "static-v7";
 const CACHE_DYNAMIC_NAME = "dynamic-v6";
@@ -7,15 +8,15 @@ var STATIC_FILES = [
   "/",
   "/index.html",
   "/offline.html",
-  "/src/js/app.js",
-  "/src/js/feed.js",
-  "/src/js/idb.js",
-  "/src/js/promise.js",
-  "/src/js/fetch.js",
-  "/src/js/material.min.js",
-  "/src/css/app.css",
-  "/src/css/feed.css",
-  "/src/images/main-image.jpg",
+  "./src/js/app.js",
+  "./src/js/feed.js",
+  "./src/js/idb.js",
+  "./src/js/promise.js",
+  "./src/js/fetch.js",
+  "./src/js/material.min.js",
+  "./src/css/app.css",
+  "./src/css/feed.css",
+  "./src/images/main-image.jpg",
   "https://fonts.googleapis.com/css?family=Roboto:400,700",
   "https://fonts.googleapis.com/icon?family=Material+Icons",
   "https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css",
@@ -187,7 +188,7 @@ self.addEventListener("sync", (event) => {
       readAllData("sync-posts").then((data) => {
         for (let dt of data) {
           fetch(
-            `${process.env.BACKEND_URL}/postData`,
+            `http://localhost:5000/postData`,
             {
               method: "POST",
               headers: {
@@ -251,8 +252,8 @@ self.addEventListener('push',(event)=>{
 
   let options={
     body:"abc",
-    icon:"/src/images/icons/app-icon-96x96.png",
-    badge:"/src/images/icons/app-icon-96x96.png",
+    icon:"./src/images/icons/app-icon-96x96.png",
+    badge:"./src/images/icons/app-icon-96x96.png",
   }
 
   event.waitUntil(
