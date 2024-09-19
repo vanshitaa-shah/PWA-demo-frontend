@@ -51,7 +51,7 @@ const displayConfirmNotification = () => {
       ],
     };
     navigator.serviceWorker.ready.then((swreg) => {
-      swreg.showNotification('Success', options);
+      swreg.showNotification('Successfully Subscribed', options);
     });
   }
 };
@@ -67,30 +67,34 @@ const configurePushSub = () => {
       return swreg.pushManager.getSubscription();
     })
     .then((sub) => {
-
-      console.log({sub});
+      console.log({ sub });
       if (sub === null) {
         //create new subscription
-        let vapidPublicKey ="BIE1h6WDiVTTmPSRmgCdupFKYjL0p9HE3CNMOE9OprhHug095g1OPoXksVTbL3I_NSpOWJWg9HEj4Kgv6q3Xnv0"
-        console.log({vapidPublicKey});
+        let vapidPublicKey =
+          'BK-wC9PaG-eF11KXKHtKQ3EbdL3zTkRax8fR-ENqRX46UW5x6WlS3Yy2bD2QJBLjcYTCGs4-7TKO-b0fqzhJEns                                                                                                                                                                                                                                         ';
+        console.log({ vapidPublicKey });
 
         let convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
 
-        console.log({convertedVapidPublicKey});
-        const a=reg.pushManager.subscribe({
+        console.log({ convertedVapidPublicKey });
+        const newSubscription = reg.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: convertedVapidPublicKey,
         });
 
-        console.log({a});
-        return a
+        console.log({ newSubscription });
+        return newSubscription;
       } else {
-        return sub;
       }
     })
     .then((newSub) => {
-      console.log({newSub});
-      fetch(
+      console.log({ newSub });
+
+      if (!newSub) {
+        console.log('here');
+        return;
+      }
+      return fetch(
         'https://pwagram-14946-default-rtdb.firebaseio.com/subscriptions.json',
         {
           method: 'POST',
@@ -107,10 +111,12 @@ const configurePushSub = () => {
         }
       });
     })
+
     .catch((error) => {
       console.log('Error: ', error);
     });
 };
+
 
 const askForNotificationPersmission = () => {
   Notification.requestPermission((result) => {

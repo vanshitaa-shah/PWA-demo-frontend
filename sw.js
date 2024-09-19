@@ -251,7 +251,7 @@ self.addEventListener('push',(event)=>{
   }
 
   let options={
-    body:"abc",
+    body:data.content,
     icon:"./src/images/icons/app-icon-96x96.png",
     badge:"./src/images/icons/app-icon-96x96.png",
   }
