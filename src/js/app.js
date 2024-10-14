@@ -90,8 +90,8 @@ const configurePushSub = () => {
     .then((newSub) => {
       console.log({ newSub });
 
-      if (!newSub) {
-        console.log('here');
+      if(!newSub){
+        console.log("here");
         return;
       }
       return fetch(
@@ -104,7 +104,7 @@ const configurePushSub = () => {
           },
           body: JSON.stringify(newSub),
         }
-      ).then((res) => {
+      ) .then((res) => { 
         if (res.ok) {
           console.log('Sent data', res);
           displayConfirmNotification();
@@ -112,11 +112,12 @@ const configurePushSub = () => {
       });
     })
 
+    
+   
     .catch((error) => {
       console.log('Error: ', error);
     });
 };
-
 
 const askForNotificationPersmission = () => {
   Notification.requestPermission((result) => {
